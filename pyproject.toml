@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "irmy-db"
+version = "1.0.0"
+description = "Async PostgreSQL (SQLAlchemy + asyncpg) access with healthcheck and Prometheus metrics for IRMy services"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Vitalii Bendyna", email = "info@irmy.tech" }]
+keywords = ["irmy", "postgresql", "sqlalchemy", "asyncpg", "prometheus"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Database",
+    "Typing :: Typed",
+]
+dependencies = [
+    "SQLAlchemy>=2.0.54,<2.1",
+    "asyncpg>=0.31.0,<1",
+    "greenlet>=3.5.6,<4",
+    "prometheus-client>=0.26.0,<1",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8",
+    "pytest-asyncio>=0.24",
+]
+
+[tool.setuptools.packages.find]
+include = ["irmy_db*"]
+
+[tool.setuptools.package-data]
+irmy_db = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
